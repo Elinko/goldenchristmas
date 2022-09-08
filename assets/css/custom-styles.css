@@ -1,0 +1,127 @@
+
+.page-home {
+  margin-top: -80px; 
+
+  @media (max-width: 991px) {
+    
+    margin-top: -60px;
+  }
+}
+
+.page-home .has-text-color.has-background p {
+  margin: 0;
+  padding: 1.25em 2.375em 
+}
+
+.social-profile svg {
+  height: 22px;
+}
+
+.slick-responsive {
+  margin-bottom: 80px;
+}
+.slick-responsive img {
+  padding: 10px;
+  height: 500px; 
+  object-fit: cover;
+  width: 100%;
+}
+
+.slick-next:before, .slick-prev:before {
+  font-size: 30px;
+  color: #0b543b;;
+}
+
+@media (max-width: 768px) {
+  .slick-responsive img {
+  padding: 5px;
+  height: 410px;
+  }
+}
+@media (max-width: 450px) {
+  .slick-responsive img { 
+  height: 350px;
+  }
+}
+
+.properties-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.properties img {
+  height: 80px;  
+  width: auto; 
+  margin: 0 auto 7px;
+
+}
+
+.properties { 
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: start;
+  padding: 10px 10px;
+  background-color: #fff; 
+  /* width: 138px; */
+  border: 1px solid rgba(33,33,33,0.2);
+  /* border-left: 0 */
+}
+
+.properties:not(:first-child) {
+  border-left: 0
+}
+
+.properties span { 
+  font-size: 14px;
+  display: flex;
+  margin: 0 auto 5px; 
+}
+
+
+.properties strong { 
+  line-height: 30px; 
+}
+
+.woof_btn_default {
+  transition: 0.3s all;
+  padding-left: 24px;
+  padding-right: 24px;
+  color: #fff;
+  background-color: #0b543b;
+  width: auto;
+  height: auto;
+  
+}
+
+.woof_btn_default:hover {
+  color: #fff!important;
+  border-color: #a32d37;
+}
+
+.woocommerce-sorting-wrapper select {
+  max-width: 210px!important;
+}
+
+.header_layout_2 .header-col {
+  padding-left: 0px!important;
+}
+ 
+
+.has-palette-8-color-5-background-color {
+
+  padding: 30px;;
+}
+
+.has-palette-8-color-5-background-color img {
+  width: 60px;
+}
+
+.berocket_better_labels_inline {
+  
+    display: flex; 
+    flex-direction: column;
+    align-items: end;
+}
