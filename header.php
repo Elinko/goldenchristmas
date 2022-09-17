@@ -23,7 +23,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
 	
 	<link rel="stylesheet" href="<?php bloginfo('stylesheet_directory');?>/assets/slick-lightbox/slick-lightbox.css"> 
-	<link rel="stylesheet" href="<?php bloginfo('stylesheet_directory');?>/assets/css/custom-styles.css?v1.11455"> 
+	<link rel="stylesheet" href="<?php bloginfo('stylesheet_directory');?>/assets/css/custom-styles.css?v1.1145d5"> 
 
 	 
 

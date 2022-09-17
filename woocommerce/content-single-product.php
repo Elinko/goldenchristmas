@@ -17,6 +17,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
+
 global $product;
 
 /**
@@ -103,6 +104,7 @@ if ( post_password_required() ) {
 
 		<?php the_content() ?>
     </div>
+ 
   
 	<?php if($download): ?>
 		<div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--additional_information panel entry-content wc-tab"
@@ -129,111 +131,231 @@ if ( post_password_required() ) {
 
 			<?php  
 
-		 
-				// $vars = $product->get_available_variations();
-				// var_dump($vars);
 
-			
-			global $product;
+// echo 'Ahoj';
+				$vars = $product->get_available_variations();
 
-					$formatted_attributes = array();
+				// echo get_post_meta( $var_id, "custom_field", true );
 
-					$attributes = $product->get_attributes();
 
-					foreach($attributes as $attr=>$attr_deets){
 
-						$attribute_label = wc_attribute_label($attr);
+				// {{{ data.variation.custom_field }}}
 
-						if ( isset( $attributes[ $attr ] ) || isset( $attributes[ 'pa_' . $attr ] ) ) {
+ 
 
-							$attribute = isset( $attributes[ $attr ] ) ? $attributes[ $attr ] : $attributes[ 'pa_' . $attr ];
+				// var_dump(get_post_meta(get_the_id(),'custom_field',true););
+			 
+					// $vyska[] = array();
+					// $vaha[] = array();
+					// $pocet_korun[] = array();
+					// $vyska_od_zeme[] = array();
+					// $pocet_konarov[] = array();
+					// $pocet_vetviciek[] = array();
+					// $stojan[] = array();
+					// $priemer[] = array();
 
-							if ( $attribute['is_taxonomy'] ) {
+					// echo '<pre>' . var_export($vars[0]['attributes']['attribute_pa_vyska'], true) . '</pre>';
 
-								$formatted_attributes[$attribute_label] = implode( ', ', wc_get_product_terms( $product->id, $attribute['name'], array( 'fields' => 'names' ) ) );
+ 
+					// var_dump($vars);
 
-							} else {
-								
-								$formatted_attributes[$attribute_label] = $attribute['value'];
-							}
-
+					foreach ($vars as $key => $val) {
+						// var_dump($val);
+						if($val['attributes']) {
+							$vyska[] =  $val['attributes']['attribute_pa_vyska']; 
+							// var_dump($val['attribute_pa_vyska']);
 						}
+						else {
+							$vyska[$key] = '&nbsp;'; 
+						}
+						if($val['weight']!='') {
+							$vaha[$key] = $val['weight']; 
+						}
+						else {
+							$vaha[$key] = '&nbsp;'; 
+						}
+						if($val['pocet_korun']!='') {
+							$pocet_korun[$key] = $val['pocet_korun']; 
+						}
+						// else {
+						// 	$pocet_korun[$key] = '&nbsp;'; 
+						// }
+						if($val['vyska_od_zeme']!='') {
+							$vyska_od_zeme[$key] = $val['vyska_od_zeme']; 
+						}
+						else {
+							$vyska_od_zeme[$key] = '&nbsp;'; 
+						}
+						if($val['pocet_konarov']!='') {
+							$pocet_konarov[$key] = $val['pocet_konarov']; 
+						}
+						// else {
+						// 	$pocet_konarov[$key] = '&nbsp;'; 
+						// }
+						if($val['pocet_vetviciek']!='') {
+							$pocet_vetviciek[$key] = $val['pocet_vetviciek']; 
+						}
+						// else {
+						// 	$pocet_vetviciek[$key] = '&nbsp;'; 
+						// }
+						if($val['stojan']!='') {
+							$stojan[$key] = $val['stojan']; 
+						}
+						// else {
+						// 	$stojan[$key] = '&nbsp;'; 
+						// }
+						if($val['priemer']!='') {
+							$priemer[$key] = $val['priemer']; 
+						} 
+						// else {
+						// 	$priemer[$key] = '&nbsp;';
+						// }
+						if($val['druh_ihlicia']!='') {
+							$druh_ihlicia[$key] = $val['druh_ihlicia']; 
+						} 
+						// else {
+						// 	$druh_ihlicia[$key] = '&nbsp;';
+						// }
+						if($val['balenie']!='') {
+							$balenie[$key] = $val['balenie']; 
+						} 
+						// else {
+						// 	$balenie[$key] = '&nbsp;';
+						// }
+					}
+
+					// var_dump($vyska);
+
+
+
+					if($vyska !='') {
+						echo '<div class="properties"><img src="'.get_bloginfo("stylesheet_directory").'/assets/img/icons/icons-height.png" alt="Výška"><span>Výška</span><strong>';
+						foreach ($vyska as $ky => $item) { echo $item . '<br>'; }
+						echo '</strong></div>';
+					}
+
+					if($priemer !='') {
+						echo '<div class="properties"><img src="'.get_bloginfo("stylesheet_directory").'/assets/img/icons/icons-average.png" alt="Priemer"><span>Priemer</span><strong>';
+						foreach ($priemer as $ky => $item) { echo $item . '<br>'; }
+						echo '</strong></div>';
+					}
+
+					if($vyska_od_zeme !='') {
+						echo '<div class="properties"><img src="'.get_bloginfo("stylesheet_directory").'/assets/img/icons/icons-average.png" alt="vyska_od_zeme"><span>Výška od zeme</span><strong>';
+						foreach ($vyska_od_zeme as $ky => $item) { echo $item . '<br>'; }
+						echo '</strong></div>';
+					}
+
+					if($vyska_od_zeme !='') {
+						echo '<div class="properties"><img src="'.get_bloginfo("stylesheet_directory").'/assets/img/icons/icons-trunk.png" alt="vyska_od_zeme"><span>Výška od zeme</span><strong>';
+						foreach ($vyska_od_zeme as $ky => $item) { echo $item . '<br>'; }
+						echo '</strong></div>';
+					}
+
+					if($vaha !='') {
+						echo '<div class="properties"><img src="'.get_bloginfo("stylesheet_directory").'/assets/img/icons/icons-weight.png" alt="vaha"><span>Váha</span><strong>';
+						foreach ($vaha as $ky => $item) { echo $item . '<br>'; }
+						echo '</strong></div>';
+					}
+
+					if($pocet_korun !='') {
+						echo '<div class="properties"><img src="'.get_bloginfo("stylesheet_directory").'/assets/img/icons/icons-layers.png" alt="pocet_korun"><span>Počet korún</span><strong>';
+						foreach ($pocet_korun as $ky => $item) { echo $item . '<br>'; }
+						echo '</strong></div>';
+					}
+
+					if($pocet_konarov !='') {
+						echo '<div class="properties"><img src="'.get_bloginfo("stylesheet_directory").'/assets/img/icons/icons-prepitych.png" alt="pocet_konarov"><span>Počet konárov</span><strong>';
+						foreach ($pocet_konarov as $ky => $item) { echo $item . '<br>'; }
+						echo '</strong></div>';
+					}
+
+					if($pocet_vetviciek !='') {
+						echo '<div class="properties"><img src="'.get_bloginfo("stylesheet_directory").'/assets/img/icons/icons-twig.png" alt="pocet_vetviciek"><span>Počet vetvičiek</span><strong>';
+						foreach ($pocet_vetviciek as $ky => $item) { echo $item . '<br>'; }
+						echo '</strong></div>';
+					}
+
+
+					if($stojan !='') {
+						echo '<div class="properties"><img src="'.get_bloginfo("stylesheet_directory").'/assets/img/icons/icons-stand.png" alt="stojan"><span>Stojan</span><strong>';
+						foreach ($stojan as $ky => $item) { echo $item . '<br>'; }
+						echo '</strong></div>';
+					}
+
+					if($druh_ihlicia !='') {
+						echo '<div class="properties"><img src="'.get_bloginfo("stylesheet_directory").'/assets/img/icons/icons-needles.png" alt="stojan"><span>Druh ihličia</span><strong>';
+						foreach ($druh_ihlicia as $ky => $item) { echo $item . '<br>'; }
+						echo '</strong></div>';
+					}
+
+
+					if($balenie !='') {
+						echo '<div class="properties"><img src="'.get_bloginfo("stylesheet_directory").'/assets/img/icons/icons-size.png" alt="stojan"><span>Balenie</span><strong>';
+						foreach ($balenie as $ky => $item) { echo $item . '<br>'; }
+						echo '</strong></div>';
 					}
 					
+			 
 					
-					foreach ($formatted_attributes as $key => $value) {
+					
+					// foreach ($formatted_attributes as $key => $value) {
 						
-						$copy = '';
+					// 	$copy = '';
 
-						if( $key == 'Priemer' ) {
-							$copy = '<div class="properties"><img src="'.get_bloginfo("stylesheet_directory").'/assets/img/icons/icons-average.png" alt="'.$key.'"><span>'.$key.'</span><strong>';
+					// 	if( $key == 'Priemer' ) {
+					// 		$copy = '<div class="properties"><img src="'.get_bloginfo("stylesheet_directory").'/assets/img/icons/icons-average.png" alt="'.$key.'"><span>'.$key.'</span><strong>';
 						
-						} 
-						if( $key == 'Výška' ) { 
-							$copy =  '<div class="properties"><img src="'.get_bloginfo("stylesheet_directory").'/assets/img/icons/icons-height.png" alt="'.$key.'"><span>'.$key.'</span><strong>';
-						}
-						if( $key == 'Počet korún' ) {
-							$copy =  '<div class="properties"><img src="'.get_bloginfo("stylesheet_directory").'/assets/img/icons/icons-layers.png" alt="'.$key.'"><span>'.$key.'</span><strong>';
-						}
-						if( $key == 'Počet konárov' ) {
-							$copy =  '<div class="properties"><img src="'.get_bloginfo("stylesheet_directory").'/assets/img/icons/icons-prepitych.png" alt="'.$key.'"><span>'.$key.'</span><strong>';
-						}
-						if( $key == 'Stojan' ) {
-							$copy =  '<div class="properties"><img src="'.get_bloginfo("stylesheet_directory").'/assets/img/icons/icons-stand.png" alt="'.$key.'"><span>'.$key.'</span><strong>';
-						}
-						if( $key == 'Výška od zeme' ) {
-							$copy =  '<div class="properties"><img src="'.get_bloginfo("stylesheet_directory").'/assets/img/icons/icons-trunk.png" alt="'.$key.'"><span>'.$key.'</span><strong>';
-						}
-						if( $key == 'Počet vetvičiek' ) {
-							$copy =  '<div class="properties"><img src="'.get_bloginfo("stylesheet_directory").'/assets/img/icons/icons-twig.png" alt="'.$key.'"><span>'.$key.'</span><strong>';
-							// sort($value);
+					// 	} 
+					// 	if( $key == 'Výška' ) { 
+					// 		$copy =  '<div class="properties"><img src="'.get_bloginfo("stylesheet_directory").'/assets/img/icons/icons-height.png" alt="'.$key.'"><span>'.$key.'</span><strong>';
+					// 	}
+					// 	if( $key == 'Počet korún' ) {
+					// 		$copy =  '<div class="properties"><img src="'.get_bloginfo("stylesheet_directory").'/assets/img/icons/icons-layers.png" alt="'.$key.'"><span>'.$key.'</span><strong>';
+					// 	}
+					// 	if( $key == 'Počet konárov' ) {
+					// 		$copy =  '<div class="properties"><img src="'.get_bloginfo("stylesheet_directory").'/assets/img/icons/icons-prepitych.png" alt="'.$key.'"><span>'.$key.'</span><strong>';
+					// 	}
+					// 	if( $key == 'Stojan' ) {
+					// 		$copy =  '<div class="properties"><img src="'.get_bloginfo("stylesheet_directory").'/assets/img/icons/icons-stand.png" alt="'.$key.'"><span>'.$key.'</span><strong>';
+					// 	}
+					// 	if( $key == 'Výška od zeme' ) {
+					// 		$copy =  '<div class="properties"><img src="'.get_bloginfo("stylesheet_directory").'/assets/img/icons/icons-trunk.png" alt="'.$key.'"><span>'.$key.'</span><strong>';
+					// 	}
+					// 	if( $key == 'Počet vetvičiek' ) {
+					// 		$copy =  '<div class="properties"><img src="'.get_bloginfo("stylesheet_directory").'/assets/img/icons/icons-twig.png" alt="'.$key.'"><span>'.$key.'</span><strong>';
+					// 		// sort($value);
 							
-						}
-						if( $key == 'Váha' ) {
-							$copy =  '<div class="properties"><img src="'.get_bloginfo("stylesheet_directory").'/assets/img/icons/icons-weight.png" alt="'.$key.'"><span>'.$key.'</span><strong>';
-							// sort($value);
-						}
-						if( $key == 'Druh ihličia' ) {
-							$copy =  '<div class="properties"><img src="'.get_bloginfo("stylesheet_directory").'/assets/img/icons/icons-needles.png" alt="'.$key.'"><span>'.$key.'</span><strong>';
-						}
+					// 	}
+					// 	if( $key == 'Váha' ) {
+					// 		$copy =  '<div class="properties"><img src="'.get_bloginfo("stylesheet_directory").'/assets/img/icons/icons-weight.png" alt="'.$key.'"><span>'.$key.'</span><strong>';
+					// 		// sort($value);
+					// 	}
+					// 	if( $key == 'Druh ihličia' ) {
+					// 		$copy =  '<div class="properties"><img src="'.get_bloginfo("stylesheet_directory").'/assets/img/icons/icons-needles.png" alt="'.$key.'"><span>'.$key.'</span><strong>';
+					// 	}
 						
-						if( $key == 'Balenie' ) {
-							$copy =  '<div class="properties"><img src="'.get_bloginfo("stylesheet_directory").'/assets/img/icons/icons-size.png" alt="'.$key.'"><span>'.$key.'</span><strong>';
-						}
+					// 	if( $key == 'Balenie' ) {
+					// 		$copy =  '<div class="properties"><img src="'.get_bloginfo("stylesheet_directory").'/assets/img/icons/icons-size.png" alt="'.$key.'"><span>'.$key.'</span><strong>';
+					// 	}
 						
 						
 						
-						$value = explode(',', $value);
+						// $value = explode(',', $value);
 
-						array_multisort(preg_replace('~\D+~','',$value),$value);
+						// array_multisort(preg_replace('~\D+~','',$value),$value);
 						// var_export($value);
 
-
-
-						// foreach ($value as $key => $val) {
-						// 	$value[$key] = trim($val);
-						// }
-
-						 
 						
-						if( $key != 'Výška' ) { 
-						}
+					// 	foreach ($value as $key => $val) {
+					// 		$copy= $copy . $val.'<br>';
+					// 	}
 
-						// sort($value);
-						// var_dump( $value);
-						
-						
-						// var_dump($value);
-						
-						foreach ($value as $key => $val) {
-							$copy= $copy . $val.'<br>';
-						}
-
-						$copy= $copy.'</strong></div>';
-						echo $copy;
+					// 	$copy= $copy.'</strong></div>';
+					// 	echo $copy;
 				
 						
-					}
+					// }
 
 					// print_r($formatted_attributes['Výška']);
 
