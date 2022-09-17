@@ -45,7 +45,7 @@ get_header();
 		<h3 class="has-text-align-center">Najnovšie produkty</h3>
 	
 		<?php
-			echo do_shortcode('[top_rated_products limit="4"] ');
+			echo do_shortcode('[recent_products limit="4"] ');
 		?>
 	
 		<h3 class="has-text-align-center">Zľava</h3>
