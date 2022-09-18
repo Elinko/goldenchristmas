@@ -39,13 +39,13 @@ get_header();
 		<h3 class="has-text-align-center">TOP produkty</h3>
 	
 		<?php
-			echo do_shortcode('[best_selling_products limit="4"] ');
+			echo do_shortcode('[products category="top" limit="4" columns="4"  ] ');
 		?>
 	
 		<h3 class="has-text-align-center">Najnovšie produkty</h3>
 	
 		<?php
-			echo do_shortcode('[recent_products limit="4"] ');
+			echo do_shortcode('[recent_products limit="4" columns="4"] ');
 		?>
 	
 		<h3 class="has-text-align-center">Zľava</h3>
